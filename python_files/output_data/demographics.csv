@@ -1,0 +1,101 @@
+patient_id,birth_date,sex,race,ethnicity,education,income
+P001,1980-02-24,F,White,Hispanic,Bachelor,66628.4055432592
+P002,1966-05-14,M,White,Non-Hispanic,Bachelor,73340.35518749196
+P003,1967-04-24,M,White,Non-Hispanic,Bachelor,75539.8553848241
+P004,1958-09-17,M,Other,Non-Hispanic,Some College,59101.93487969044
+P005,1955-03-28,F,White,Non-Hispanic,High School,21764.99840798863
+P006,1949-08-17,M,White,Non-Hispanic,High School,35478.38250720807
+P007,1963-12-25,F,White,Non-Hispanic,Some College,36300.5310386955
+P008,1975-12-10,M,Black,Non-Hispanic,Bachelor,60031.85289318583
+P009,1961-07-11,F,White,Non-Hispanic,Graduate,80045.23805514253
+P010,1980-02-24,M,White,Non-Hispanic,Bachelor,66134.40180394801
+P011,1951-07-06,M,White,Non-Hispanic,High School,44086.31081030705
+P012,1964-12-01,M,Asian,Non-Hispanic,High School,27863.04879984187
+P013,1958-10-17,F,Asian,Non-Hispanic,Some College,49177.667075162004
+P014,1978-05-03,M,White,Non-Hispanic,Some College,61897.40474034203
+P015,1960-06-20,F,Asian,Non-Hispanic,Bachelor,89901.98737954494
+P016,1975-11-04,M,White,Non-Hispanic,Some College,63424.5063913363
+P017,1980-02-24,M,White,Non-Hispanic,Graduate,72814.03087932349
+P018,1969-03-22,M,Other,Non-Hispanic,Bachelor,61703.80840741132
+P019,1966-05-30,F,White,Non-Hispanic,Bachelor,98742.5784832825
+P020,1980-02-24,M,White,Non-Hispanic,Some College,49976.28915073131
+P021,1980-02-24,M,White,Non-Hispanic,High School,43248.75615294972
+P022,1972-07-18,M,Asian,Non-Hispanic,Graduate,74984.19005937982
+P023,1969-09-25,M,Black,Non-Hispanic,Some College,41900.36194702916
+P024,1961-04-01,F,White,Non-Hispanic,High School,45593.0733212864
+P025,1946-08-29,F,White,Hispanic,Some College,59027.6606837921
+P026,1963-12-06,M,White,Hispanic,Some College,75165.02397051363
+P027,1956-05-08,F,White,Non-Hispanic,High School,33369.12220571876
+P028,1969-11-19,F,White,Non-Hispanic,High School,41629.56728160486
+P029,1949-02-10,F,White,Non-Hispanic,Bachelor,75649.5787576472
+P030,1973-02-13,M,White,Hispanic,Bachelor,75956.12701058776
+P031,1972-04-24,M,Black,Non-Hispanic,Some College,47205.75959841377
+P032,1969-12-19,F,White,Non-Hispanic,Some College,54109.06676944677
+P033,1971-07-03,M,Other,Non-Hispanic,High School,38288.38371567977
+P034,1975-05-08,M,White,Hispanic,Graduate,74057.65424891426
+P035,1979-11-07,F,White,Hispanic,Bachelor,61234.32148142556
+P036,1946-12-01,M,White,Non-Hispanic,Graduate,74309.71711099587
+P037,1962-01-03,F,White,Non-Hispanic,High School,43067.118024723146
+P038,1980-02-24,F,White,Non-Hispanic,High School,36815.89157998887
+P039,1952-05-05,M,Asian,Non-Hispanic,Some College,47009.99244583833
+P040,1965-03-30,F,Other,Non-Hispanic,Graduate,109506.84755477906
+P041,1980-02-24,F,Black,Non-Hispanic,High School,32773.97138084226
+P042,1966-03-23,M,White,Non-Hispanic,Bachelor,73008.44061150403
+P043,1962-07-14,F,White,Non-Hispanic,High School,24227.697038225244
+P044,1967-06-30,M,White,Non-Hispanic,Some College,46722.761755675834
+P045,1968-05-03,M,White,Non-Hispanic,Graduate,84239.96576318555
+P046,1964-05-11,F,White,Non-Hispanic,Bachelor,64698.238471602104
+P047,1965-05-06,M,White,Non-Hispanic,Some College,53263.95132660187
+P048,1969-03-18,F,White,Non-Hispanic,Graduate,89700.98324476826
+P049,1945-02-23,F,White,Non-Hispanic,Some College,43491.45777974348
+P050,1955-10-30,F,White,Non-Hispanic,Bachelor,62124.745755986
+P051,1967-07-29,M,Black,Non-Hispanic,Some College,43351.64837427785
+P052,1963-08-24,F,Black,Hispanic,High School,45086.741959367086
+P053,1958-02-02,M,Black,Non-Hispanic,Bachelor,61219.73780724558
+P054,1956-03-17,F,White,Non-Hispanic,Graduate,91617.4176638701
+P055,1953-06-22,M,White,Non-Hispanic,High School,45323.11338293437
+P056,1964-11-29,M,White,Non-Hispanic,Bachelor,86080.19734181456
+P057,1952-05-28,M,White,Non-Hispanic,Some College,54042.340098463275
+P058,1960-11-18,M,White,Non-Hispanic,Some College,54763.88198296091
+P059,1960-09-05,M,Black,Hispanic,Bachelor,69196.9504519655
+P060,1967-04-17,M,White,Non-Hispanic,High School,21245.227543759236
+P061,1950-10-25,F,White,Non-Hispanic,High School,50626.2935064802
+P062,1955-04-22,M,Black,Non-Hispanic,Bachelor,75638.56330013117
+P063,1963-11-10,M,White,Non-Hispanic,High School,38339.43932404152
+P064,1978-10-27,M,White,Non-Hispanic,Bachelor,78140.46949788833
+P065,1959-12-21,F,Black,Non-Hispanic,High School,41757.72751517452
+P066,1969-06-01,F,White,Non-Hispanic,Some College,58599.14673404978
+P067,1961-12-07,F,White,Non-Hispanic,Bachelor,64321.82084657096
+P068,1967-09-11,M,White,Non-Hispanic,High School,40150.8931347919
+P069,1971-06-28,M,Black,Non-Hispanic,High School,49729.453144584404
+P070,1971-09-02,F,Asian,Non-Hispanic,Graduate,94865.23648207422
+P071,1972-05-13,M,White,Hispanic,High School,30241.138544017977
+P072,1969-11-03,M,White,Non-Hispanic,High School,36857.42196646809
+P073,1959-09-08,M,White,Non-Hispanic,Some College,46117.41936149721
+P074,1975-10-28,M,White,Non-Hispanic,Some College,67874.2860207049
+P075,1960-01-18,F,White,Non-Hispanic,Some College,69094.0770840419
+P076,1959-10-26,M,Black,Hispanic,Some College,56315.479223418624
+P077,1977-05-31,M,Asian,Non-Hispanic,High School,46601.07243687839
+P078,1967-09-12,F,White,Hispanic,High School,36386.68576488966
+P079,1945-02-23,M,White,Non-Hispanic,Some College,52751.467049420215
+P080,1975-10-23,F,White,Hispanic,Bachelor,62503.046109155606
+P081,1969-07-09,F,White,Non-Hispanic,Some College,69338.56820422695
+P082,1960-09-21,M,White,Non-Hispanic,Graduate,71674.65272591957
+P083,1971-05-11,M,White,Hispanic,Bachelor,66347.09036459225
+P084,1972-04-22,F,White,Hispanic,Some College,45492.05970720678
+P085,1966-10-07,F,White,Non-Hispanic,High School,26685.589637051962
+P086,1960-08-21,F,White,Hispanic,Graduate,73486.33898686372
+P087,1980-02-24,M,White,Non-Hispanic,High School,57254.37425940806
+P088,1960-04-29,F,White,Non-Hispanic,High School,26904.127324260386
+P089,1950-04-04,F,White,Non-Hispanic,Graduate,87031.19739331052
+P090,1953-01-26,F,White,Hispanic,Graduate,89620.4639359617
+P091,1964-08-09,M,Black,Non-Hispanic,High School,42757.472492320594
+P092,1959-10-16,F,White,Non-Hispanic,Some College,47301.392023632994
+P093,1949-06-20,M,White,Non-Hispanic,Bachelor,84653.94569396556
+P094,1965-05-09,F,White,Non-Hispanic,High School,43050.15370292409
+P095,1963-10-09,F,White,Non-Hispanic,Bachelor,84328.27025888865
+P096,1962-07-03,F,White,Non-Hispanic,Some College,54060.22247951126
+P097,1964-10-15,F,White,Non-Hispanic,Some College,33774.23940566119
+P098,1957-12-22,F,White,Non-Hispanic,Graduate,78148.25946635113
+P099,1965-01-03,F,White,Non-Hispanic,Some College,52953.104170555605
+P100,1968-08-11,M,White,Non-Hispanic,Some College,73613.61608978323
