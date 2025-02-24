@@ -48,7 +48,7 @@ python merge_tables.py
 - `cox_analysis_privacy.py`: Enhanced Cox analysis with privacy protections
 
 ### Features
-- Privacy checks to exclude groups with n<20 (mini_size)
+- Privacy checks to exclude groups with n<20 (min_size)
 - Visualization and analysis summary of results with and without privacy enforcement
 - Comprehensive model statistics and comparisons
 - Forest plots for coefficient visualization
