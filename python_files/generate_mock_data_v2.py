@@ -10,10 +10,28 @@ import sqlite3
 from datetime import datetime, timedelta
 import json
 import random
+import argparse
 
 from comorbidity_info import CHARLSON_CONDITIONS, CONDITION_WEIGHTS
 
 # In[12]:
+
+
+# Default seed is 42, other good seeds: 999, 456, 789
+DEFAULT_SEED = 42
+# DEFAULT_SEED = 999
+
+# Create command line argument parser
+parser = argparse.ArgumentParser(description='Generate mock healthcare data with specified random seed')
+parser.add_argument('--seed', type=int, default=DEFAULT_SEED, help='Random seed for data generation (default: 42)')
+args = parser.parse_args()
+
+# Set random seed
+SEED = args.seed
+np.random.seed(SEED)
+random.seed(SEED)
+
+print(f"Using random seed: {SEED}")
 
 total_weight = sum(CONDITION_WEIGHTS.values())
 print(f"Total weight: {total_weight}")
@@ -450,6 +468,8 @@ def ensure_fresh_database():
     return True
 
 def main():
+    # Print current seed value
+    print(f"Generating data with seed: {SEED}")
 
     close_all_connections()
     
@@ -494,6 +514,8 @@ def main():
         
         # Export all tables to CSV
         export_tables_to_csv(conn)
+        
+        print(f"\nData generation complete using seed: {SEED}")
         
     finally:
         conn.close()

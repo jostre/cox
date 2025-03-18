@@ -4,6 +4,8 @@ This project consists of two main steps:
 1. Mock Healthcare Data Generation
 2. Cox Model Analysis with/without Privacy Considerations
 
+## cd to python_files folder
+
 ## Step 1: Data Generation
 
 ### Prerequisites
@@ -40,6 +42,11 @@ These files are existing data.
 python generate_mock_data_v2.py
 python merge_tables.py
 ```
+also can use --seed parameter
+```bash
+python generate_mock_data_v2.py --seed 42
+```
+Good seeds: 42, 999, 456, 789
 
 ## Part 2: Cox Analysis
 

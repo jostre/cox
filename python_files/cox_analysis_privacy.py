@@ -196,7 +196,7 @@ model_without_privacy.print_summary()
 
 def plot_forest_with_privacy(model_with_privacy, model_without_privacy, excluded_covariates=None, ax=None):
     """
-    Create a forest plot displaying “NA” for variables excluded due to privacy checks.
+    Create a forest plot displaying "NA" for variables excluded due to privacy checks.
     
     model_with_privacy: CoxPHFitter model with privacy checks applied.
 	model_without_privacy: CoxPHFitter model without privacy checks.
