@@ -39,19 +39,19 @@ These files are existing data.
 
 ### Running Data Generation
 ```bash
-python generate_mock_data_v2.py
-python merge_tables.py
+python generate_mock_data_v3.py
+python merge_tables_v3.py
 ```
 also can use --seed parameter
 ```bash
-python generate_mock_data_v2.py --seed 42
+python generate_mock_data_v3.py --seed 42
 ```
 Good seeds: 42, 999, 456, 789
+
 
 ## Part 2: Cox Analysis
 
 ### Files
-- `cox_analysis.py`: Basic Cox analysis
 - `cox_analysis_privacy.py`: Enhanced Cox analysis with privacy protections
 
 ### Features
@@ -62,9 +62,5 @@ Good seeds: 42, 999, 456, 789
 
 ### Running Analysis
 ```bash
-python cox_analysis.py
-```
-or with privacy version:
-```bash
-python cox_analysis_privacy.py
+python cox_analysis_privacy_v3.py
 ```

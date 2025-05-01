@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 # In[57]:
 
 
-combined_data = pd.read_parquet('output_data/combined_data.parquet')
+combined_data = pd.read_parquet('output_data/combined_data_processed.parquet')
 print("Columns with NaN values:")
 print(combined_data.isnull().sum())
 combined_data_clean = combined_data.dropna()
@@ -90,11 +90,29 @@ def run_cox_analysis_with_privacy(data, enforce_privacy=True):
     model: Fitted CoxPHFitter model
     excluded_groups: Dict of groups excluded due to small sample size
     """
+    # data preprocessing
+    data = data.copy()
+    
+    # handle NaN values
+    print("\nsize of data before handling NaN values:", len(data))
+    data = data.dropna(subset=['T', 'event'])  # delete rows with missing survival time or event
+    print("size of data after handling NaN values:", len(data))
+    
+    # dummy encoding for categorical variables
+    categorical_cols = ['sex', 'race', 'ethnicity', 'education']
+    data = pd.get_dummies(data, columns=categorical_cols, prefix=categorical_cols)
+    
+    # standardize travel time
+    data['min_travel_time'] = (data['min_travel_time'] - data['min_travel_time'].mean()) / data['min_travel_time'].std()
+    
+    # add nonlinear term
+    data['travel_time_squared'] = data['min_travel_time'] ** 2
+    
     # Travel Time
-    travel_covariates = ['min_travel_time']
+    travel_covariates = ['min_travel_time', 'travel_time_squared']
     
     # Demographics
-    demo_covariates = [col for col in data.columns if col.startswith(('sex_', 'race_', 'ethnicity_'))]
+    demo_covariates = [col for col in data.columns if col.startswith(('sex', 'race', 'ethnicity', 'education'))]
     
     # Comorbidity
     charlson_covariates = [
@@ -104,8 +122,8 @@ def run_cox_analysis_with_privacy(data, enforce_privacy=True):
     ]
     
     # SDOH
-    sdoh_covariates = [col for col in data.columns 
-                      if col.startswith('education_')] + ['SDOH']
+    data['SDOH'] = data['SDOH'].astype(float)
+    sdoh_covariates = ['SDOH']
     
     all_covariates = travel_covariates + demo_covariates + charlson_covariates + sdoh_covariates
     
@@ -116,14 +134,21 @@ def run_cox_analysis_with_privacy(data, enforce_privacy=True):
     else:
         small_groups = {}
         excluded_covariates = []
-        included_covariates = all_covariates  # Use all covariates when privacy is not enforced
+        included_covariates = all_covariates
 
     # Use all covariates plus outcome columns
     cox_data = data[included_covariates + ['T', 'event']].copy()
-
-    # Fit Cox model
+    
+    # ensure no infinite values
+    cox_data = cox_data.replace([np.inf, -np.inf], np.nan)
+    cox_data = cox_data.dropna()
+    
+    print("\nsize of cox analysis data:", len(cox_data))
+    print("used variables:", included_covariates)
+    
+    # Fit Cox model with decreased penalizer to get more significant effects
     cph = CoxPHFitter(penalizer=0.1)
-    cph.fit(cox_data, duration_col='T', event_col='event')
+    cph.fit(cox_data, duration_col='T', event_col='event', robust=True)
 
     return cph, small_groups, excluded_covariates, all_covariates
 
@@ -166,7 +191,7 @@ def generate_analysis_report(data, model, excluded_groups=None):
 
 
 # read data
-data = pd.read_parquet('output_data/combined_data.parquet')
+data = pd.read_parquet('output_data/combined_data_processed.parquet')
 
 # version 1：with privacy
 print("\n=== version 1: with privacy check ===")
