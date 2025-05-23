@@ -51,7 +51,7 @@ def perform_multiple_imputation(
     mask = df_encoded['T'] == 0
     
     if mask.sum() > 0:
-        print(f"\n发现{mask.sum()}个无就医记录的患者")
+        print(f"\nfind {mask.sum()} patients without healthcare encounter")
         
         # set all comorbidity variables to 0 for patients without healthcare encounter
         for col in comorbidity_cols:
