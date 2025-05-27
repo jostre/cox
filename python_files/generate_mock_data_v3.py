@@ -10,6 +10,8 @@ import random
 import argparse
 from scipy.stats import norm, multivariate_normal
 from typing import Dict, List, Tuple, Optional
+import os
+import shutil
 
 from comorbidity_info import CHARLSON_CONDITIONS, CONDITION_WEIGHTS
 
@@ -870,18 +872,49 @@ def ensure_fresh_database():
             return False
     return True
 
-def main():
-    print(f"Generating data with seed: {SEED}")
+def export_tables_to_custom_dir(conn, output_dir):
+    """
+    将数据库表导出到指定目录的CSV文件
     
-    close_all_connections()
+    参数:
+    conn: sqlite3.Connection, 数据库连接
+    output_dir: str, 输出目录
+    """
+    tables = [
+        'geolocation', 'demographics', 'encounter', 
+        'procedure_table', 'provider', 'rucc', 'travel_time','diagnosis'
+    ]
     
-    if not ensure_fresh_database():
-        return
+    for table in tables:
+        query = f"SELECT * FROM {table}"
+        df = pd.read_sql_query(query, conn)
+        df.to_csv(f'{output_dir}/{table}.csv', index=False)
+        print(f"Exported {table}.csv with {len(df)} rows")
+
+        print(f"\nFirst few rows of {table}:")
+        print(df.head())
+        print("\n" + "="*50 + "\n")
+
+def generate_dataset(time_effects, output_dir, seed=42):
+    """
+    生成单个数据集
     
+    参数:
+    time_effects: dict, 旅行时间效应配置
+    output_dir: str, 输出目录
+    seed: int, 随机种子
+    """
+    print(f"\n开始生成数据集，输出目录: {output_dir}")
+    
+    # 创建输出目录
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
+    # 创建数据库连接
     conn = create_database()
     
     try:
-        # Load your existing data
+        # 加载位置数据
         with open('input_data/sampled_block_group_centers_100_30.json', 'r') as f:
             patient_locations = json.load(f)
             
@@ -907,26 +940,80 @@ def main():
         with open('input_data/ExactTravelTimeDatafromAllMatrix.json', 'r') as f:
             travel_times = json.load(f)
         
-        # Load existing data into database and generate mock data
+        # 加载基础数据
         load_existing_data(conn, patient_locations, clinic_locations, travel_times)
+        
+        # 创建数据生成器实例
+        medical_generator = MedicalDataGenerator(seed=seed)
+        medical_generator.base_params['encounter']['time_effects'] = time_effects
+        
+        # 生成数据
         generate_mock_data(conn)
-
-        # verify data
-        verify_data(conn)
         
-        # Export all tables to CSV
-        export_tables_to_csv(conn)
+        # 导出数据到指定目录
+        export_tables_to_custom_dir(conn, output_dir)
         
-        print(f"\nData generation complete using seed: {SEED}")
+        # 复制数据库文件到输出目录
+        shutil.copy('healthcare.db', os.path.join(output_dir, 'healthcare.db'))
+        
+        print(f"数据集生成完成: {output_dir}")
         
     except Exception as e:
-        print(f"error: {str(e)}")
-        print("error type:", type(e).__name__)
-        import traceback
-        print("error stack:")
-        print(traceback.format_exc())
+        print(f"生成数据集时出错: {str(e)}")
+        raise
     finally:
         conn.close()
+
+def main():
+    """主函数：生成四个不同旅行时间影响的数据集"""
+    
+    # 定义四种不同的时间效应
+    time_effects_configs = {
+        'strong': {
+            0.5: 3.0,   # 30 min
+            1.0: 1.5,   # 1 hour
+            2.0: 0.1,   # 2 hours
+            3.0: 0.01,  # 3 hours
+            float('inf'): 0.001  # 3 hours above
+        },
+        'medium': {
+            0.5: 2.0,   # 30 min
+            1.0: 1.0,   # 1 hour
+            2.0: 0.2,   # 2 hours
+            3.0: 0.05,  # 3 hours
+            float('inf'): 0.01  # 3 hours above
+        },
+        'weak': {
+            0.5: 1.5,   # 30 min
+            1.0: 1.2,   # 1 hour
+            2.0: 0.8,   # 2 hours
+            3.0: 0.5,   # 3 hours
+            float('inf'): 0.3  # 3 hours above
+        },
+        'none': {
+            0.5: 1.0,   # 30 min
+            1.0: 1.0,   # 1 hour
+            2.0: 1.0,   # 2 hours
+            3.0: 1.0,   # 3 hours
+            float('inf'): 1.0  # 3 hours above
+        }
+    }
+    
+    # 创建主输出目录
+    base_output_dir = 'output_data/multiple_datasets'
+    if not os.path.exists(base_output_dir):
+        os.makedirs(base_output_dir)
+    
+    # 为每个配置生成数据集
+    for effect_type, time_effects in time_effects_configs.items():
+        output_dir = os.path.join(base_output_dir, f'{effect_type}_travel_effect')
+        print(f"\n开始生成 {effect_type} 旅行时间影响的数据集...")
+        generate_dataset(time_effects, output_dir)
+        
+        # 打印数据集信息
+        print(f"\n{effect_type} 数据集信息:")
+        print(f"输出目录: {output_dir}")
+        print(f"旅行时间效应配置: {time_effects}")
 
 if __name__ == "__main__":
     main() 
