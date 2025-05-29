@@ -64,3 +64,8 @@ Good seeds: 42, 999, 456, 789
 ```bash
 python cox_analysis_privacy_v3.py
 ```
+
+## Prat 3: Multiple Dataset Generation with Different settings
+```bash
+python generate_multiple_datasets.py
+```
